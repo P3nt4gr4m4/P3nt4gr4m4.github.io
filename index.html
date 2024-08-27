@@ -1,171 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Menú Principal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio Web</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Estilos personalizados para el carrusel */
-      #imageCarousel {
-    max-width: 100%; /* Establece el ancho máximo al 100% del contenedor padre */
-    height: auto; /* Permite que la altura se ajuste de manera proporcional */
-    margin: 0 auto; /* Centra horizontalmente */
-    text-align: center; /* Centra el contenido del carrusel horizontalmente */
-}
-
-#imageCarousel .carousel-inner img {
-    max-width: 100%; /* Establece el ancho máximo de las imágenes al 100% */
-    height: auto; /* Permite que la altura se ajuste de manera proporcional */
-    display: inline-block; /* Alinea las imágenes como elementos en línea */
-}
-
-        /* Estilos para la descripción */
-        .carousel-caption {
-            background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-            color: #fff; /* Color del texto */
-            padding: 10px; /* Espaciado interno */
+        body {
+            padding-top: 56px;
+        }
+        .section-content {
+            padding: 2rem 0;
         }
     </style>
 </head>
 <body>
-    <header class="bg-dark text-white text-center py-4">
-        <h1>Menú Principal</h1>
-    </header>
-
-    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicadores -->
-        <ol class="carousel-indicators">
-            <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#imageCarousel" data-slide-to="1"></li>
-            <li data-target="#imageCarousel" data-slide-to="2"></li>
-            <li data-target="#imageCarousel" data-slide-to="3"></li> 
-            <li data-target="#imageCarousel" data-slide-to="4"></li><!-- Agregamos una nueva diapositiva -->
-            <li data-target="#imageCarousel" data-slide-to="5"></li>
-        </ol>
-
-        <!-- Imágenes del carrusel -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="mantenimiento.jpg" alt="Imagen 1">
-                <div class="carousel-caption">
-                    <p>Mantenimiento y reparacion de ordenadores</p>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mi Sitio Web</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCatalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Catálogo
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCatalogo">
+                            <li><a class="dropdown-item" href="#catalogo1">Catálogo 1</a></li>
+                            <li><a class="dropdown-item" href="#catalogo2">Catálogo 2</a></li>
+                            <li><a class="dropdown-item" href="#catalogo3">Catálogo 3</a></li>
+                            <li><a class="dropdown-item" href="#catalogo4">Catálogo 4</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownHerramientas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Herramientas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownHerramientas">
+                            <li><a class="dropdown-item" href="#herramienta1">Generador QR</a></li>
+                            <li><a class="dropdown-item" href="#herramienta2">Herramienta 2</a></li>
+                            <li><a class="dropdown-item" href="#herramienta3">Herramienta 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
             </div>
-            <div class="carousel-item">
-                <img src="portatiles.jpg" alt="Imagen 2">
-                <div class="carousel-caption">
-                    <p>Venta de ordenadores portatiles</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="tramites.png" alt="Imagen 3">
-                <div class="carousel-caption">
-                    <p>Tramites en linea</p>
-                </div>
-            </div>
-             <div class="carousel-item">
-                <img src="office-windows.png" alt="Imagen 4">
-                <div class="carousel-caption">
-                    <p>Activacion de Office y Windows</p>
-                </div>
-            </div>
-            
-             <div class="carousel-item">
-        <img src="tareasutiles.jpg" alt="Imagen 5">
-        <div class="carousel-caption">
-            <p>Realizamos tareas, proyectos escolares y universitarios</p>
-        </div>
-    </div>
-
-    <div class="carousel-item">
-        <img src="programas.png" alt="Imagen 6">
-        <div class="carousel-caption">
-            <p>Instalacion de Software</p>
-        </div>
-    </div>
-       </div>
-
-        <!-- Controles del carrusel -->
-        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
-        </a>
-    </div>
-<!-- Tu código de navegación aquí -->
-
-<!-- separacion-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Catalogo
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="https://p3nt4gr4m4.github.io/venta.html">Ordenadores y Accesorios</a>
-                        <a class="dropdown-item" href="https://p3nt4gr4m4.github.io/Plantas.html#">Plantas Medicinales</a>
-                        <a class="dropdown-item" href="https://p3nt4gr4m4.github.io/bisuteria.html#">Bisuteria</a>
-                        <a class="dropdown-item" href="https://p3nt4gr4m4.github.io/Otros.html#">Zapatos</a>
-                    </div>
-                </li>
-                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Herramientas
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="https://p3nt4gr4m4.github.io/qrfile.html">Generador QR</a>
-                        <a class="dropdown-item" href="https://p3nt4gr4m4.github.io/videos.html">Descargar audio y videos</a>
-                        <a class="dropdown-item" href="#">Osint</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://p3nt4gr4m4.github.io/contacto.html">Contacto</a>
-                </li>
-            </ul>
         </div>
     </nav>
 
-    <!-- Aquí puedes agregar el contenido del catálogo, como productos de ordenadores y celulares -->
-    <section class="container mt-4">
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Misión</h2>
-                <p>En CHRISPATECH, nos comprometemos a proporcionar soluciones eficientes y confiables en la reparación y mantenimiento de ordenadores, garantizando un óptimo rendimiento y durabilidad. Además, buscamos ofrecer una amplia variedad de productos de bisutería, zapatos y plantas medicinales de calidad, brindando opciones atractivas y saludables para nuestros clientes. Trabajamos con integridad, profesionalismo y pasión para superar las expectativas de nuestros clientes y fortalecer la confianza en nuestra marca.</p>
+    <main>
+        <section id="inicio" class="section-content">
+            <div class="container">
+                <h1 class="mb-4">Bienvenidos a Nuestra Empresa</h1>
+                
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Misión</h2>
+                                <p class="card-text">En CHRISPATECH, nos comprometemos a proporcionar soluciones eficientes y confiables en la reparación y mantenimiento de ordenadores, garantizando un óptimo rendimiento y durabilidad. Además, buscamos ofrecer una amplia variedad de productos de bisutería, zapatos y plantas medicinales de calidad, brindando opciones atractivas y saludables para nuestros clientes. Trabajamos con integridad, profesionalismo y pasión para superar las expectativas de nuestros clientes y fortalecer la confianza en nuestra marca.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Visión</h2>
+                                <p class="card-text">Ser reconocidos como líderes en el mercado de reparación y mantenimiento de ordenadores portátiles y de escritorio, así como en la venta de bisutería, zapatos y plantas medicinales, ofreciendo productos y servicios de alta calidad que satisfagan las necesidades de nuestros clientes y contribuyan al bienestar de la comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Quiénes Somos</h2>
+                                <p class="card-text">CHRISPATECH es una empresa con una sólida trayectoria en el mercado de la tecnología y el comercio de accesorios y productos relacionados. Nuestro equipo está formado por expertos en reparación de ordenadores y entusiastas de la tecnología, así como por apasionados de la moda y la salud. Combinamos nuestro conocimiento técnico con una amplia gama de productos de bisutería única, calzado elegante y plantas medicinales beneficiosas para ofrecer a nuestros clientes una experiencia completa y satisfactoria. Nos esforzamos por ser un referente en la industria, brindando soluciones y productos que mejoran la vida de las personas y contribuyen al crecimiento y bienestar de la comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h2>Visión</h2>
-                <p>Ser reconocidos como líderes en el mercado de reparación y mantenimiento de ordenadores portátiles y de escritorio, así como en la venta de bisutería, zapatos y plantas medicinales, ofreciendo productos y servicios de alta calidad que satisfagan las necesidades de nuestros clientes y contribuyan al bienestar de la comunidad.</p>
-            </div>
-            <div class="col-md-4">
-                <h2>Quiénes Somos</h2>
-                <p>CHRISPATECH es una empresa con una sólida trayectoria en el mercado de la tecnología y el comercio de accesorios y productos relacionados. Nuestro equipo está formado por expertos en reparación de ordenadores y entusiastas de la tecnología, así como por apasionados de la moda y la salud. Combinamos nuestro conocimiento técnico con una amplia gama de productos de bisutería única, calzado elegante y plantas medicinales beneficiosas para ofrecer a nuestros clientes una experiencia completa y satisfactoria. Nos esforzamos por ser un referente en la industria, brindando soluciones y productos que mejoran la vida de las personas y contribuyen al crecimiento y bienestar de la comunidad.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section class="container mt-4">
-        <!-- Contenido del catálogo aquí -->
-    </section>
-
-    <footer class="bg-dark text-white text-center py-2 mt-4">
-        <p>&copy; 2023 Chrispatech Mod</p>
-    </footer>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
