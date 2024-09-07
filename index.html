@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página web con menú llamativo - Bootstrap</title>
+    <title>Mi Sitio Web - Menú Personalizado</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -37,71 +37,41 @@
             padding: 4rem 0;
             margin-bottom: 2rem;
         }
-        .card {
-            transition: transform 0.3s;
-            margin-bottom: 1rem;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-briefcase-fill me-2"></i>Mi Sitio Llamativo</a>
+            <a class="navbar-brand" href="#"><i class="bi bi-briefcase-fill me-2"></i>Mi Sitio Web</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i>Inicio</a>
+                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menu1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-house-door me-1"></i>Menú 1
+                        <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-grid me-1"></i>Catálogo
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="menu1">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.1</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.2</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.3</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.4</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.5</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="catalogoDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-collection me-2"></i>Submenu 1</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-collection me-2"></i>Submenu 2</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-collection me-2"></i>Submenu 3</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-people me-1"></i>Menú 2
+                        <a class="nav-link dropdown-toggle" href="#" id="herramientasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-tools me-1"></i>Herramientas
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="menu2">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.1</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.2</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.3</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.4</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.5</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="herramientasDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-qr-code me-2"></i>Generador de QR</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2"></i>Videos</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menu3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-gear me-1"></i>Menú 3
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="menu3">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.1</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.2</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.3</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.4</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.5</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="menu4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-chat-dots me-1"></i>Menú 4
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="menu4">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.1</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.2</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.3</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.4</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.5</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-envelope me-1"></i>Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -110,34 +80,34 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4">Bienvenido a Mi Sitio Llamativo</h1>
-            <p class="lead">Un ejemplo de página web con un menú atractivo usando Bootstrap</p>
+            <h1 class="display-4">Bienvenido a Mi Sitio Web</h1>
+            <p class="lead">Descubre nuestro catálogo y herramientas útiles</p>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-graph-up text-primary me-2"></i>Características</h5>
-                        <p class="card-text">Descubre las increíbles características de nuestro sitio.</p>
+                        <h5 class="card-title"><i class="bi bi-grid text-primary me-2"></i>Catálogo</h5>
+                        <p class="card-text">Explora nuestra amplia gama de productos y servicios.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-people text-success me-2"></i>Comunidad</h5>
-                        <p class="card-text">Únete a nuestra creciente comunidad de usuarios.</p>
+                        <h5 class="card-title"><i class="bi bi-tools text-success me-2"></i>Herramientas</h5>
+                        <p class="card-text">Utiliza nuestro generador de QR y accede a videos útiles.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-question-circle text-info me-2"></i>Soporte</h5>
-                        <p class="card-text">Obtén ayuda cuando la necesites, estamos aquí para ti.</p>
+                        <h5 class="card-title"><i class="bi bi-envelope text-info me-2"></i>Contacto</h5>
+                        <p class="card-text">Estamos aquí para ayudarte. ¡Contáctanos!</p>
                     </div>
                 </div>
             </div>
