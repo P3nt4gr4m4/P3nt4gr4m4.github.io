@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web - Menú Personalizado</title>
+    <title>Mi Sitio Web Personalizado</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -37,33 +37,55 @@
             padding: 4rem 0;
             margin-bottom: 2rem;
         }
+        .card {
+            transition: transform 0.3s;
+            margin-bottom: 1rem;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .logo-placeholder {
+            width: 150px;
+            height: 50px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a90e2;
+            font-weight: bold;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-briefcase-fill me-2"></i>Mi Sitio Web</a>
+            <a class="navbar-brand" href="#">
+                <div class="logo-placeholder">
+                    Su Logo Aquí
+                </div>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i>Inicio</a>
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-grid me-1"></i>Catálogo
+                            <i class="bi bi-grid me-2"></i>Catálogo
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="catalogoDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-collection me-2"></i>Submenu 1</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-collection me-2"></i>Submenu 2</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-collection me-2"></i>Submenu 3</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box me-2"></i>Productos</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-tags me-2"></i>Ofertas</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Novedades</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="herramientasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-tools me-1"></i>Herramientas
+                            <i class="bi bi-tools me-2"></i>Herramientas
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="herramientasDropdown">
                             <li><a class="dropdown-item" href="#"><i class="bi bi-qr-code me-2"></i>Generador de QR</a></li>
@@ -71,7 +93,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-envelope me-1"></i>Contacto</a>
+                        <a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -88,7 +110,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-grid text-primary me-2"></i>Catálogo</h5>
                         <p class="card-text">Explora nuestra amplia gama de productos y servicios.</p>
@@ -96,15 +118,15 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-tools text-success me-2"></i>Herramientas</h5>
-                        <p class="card-text">Utiliza nuestro generador de QR y accede a videos útiles.</p>
+                        <p class="card-text">Utiliza nuestras herramientas para mejorar tu experiencia.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-envelope text-info me-2"></i>Contacto</h5>
                         <p class="card-text">Estamos aquí para ayudarte. ¡Contáctanos!</p>
