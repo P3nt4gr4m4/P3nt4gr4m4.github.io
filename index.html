@@ -3,150 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrispatech - Servicio Técnico</title>
+    <title>Página web con menú llamativo - Bootstrap</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <style>
         body {
-            padding-top: 76px;
+            background-color: #f0f8ff;
         }
-        .section-content {
-            padding: 2rem 0;
+        .navbar {
+            background-color: #4a90e2 !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
         }
-        .justified-text {
-            text-align: justify;
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: bold;
         }
-        .navbar-brand img {
-            height: 60px;
-            width: auto;
+        .nav-link:hover {
+            color: #ffd700 !important;
         }
-        .navbar-custom {
-            background-color: #2c3e50; /* Un tono azul oscuro */
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,.1);
         }
-        .navbar-custom .navbar-nav .nav-link {
-            color: rgba(255,255,255,.8);
+        .dropdown-item:hover {
+            background-color: #4a90e2;
+            color: white;
         }
-        .navbar-custom .navbar-nav .nav-link:hover,
-        .navbar-custom .navbar-nav .nav-link:focus {
-            color: rgba(255,255,255,1);
+        .hero {
+            background: linear-gradient(45deg, #4a90e2, #79c7c5);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
         }
-        .navbar-custom .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        .card {
+            transition: transform 0.3s;
+            margin-bottom: 1rem;
         }
-        @media (max-width: 768px) {
-            .navbar-brand img {
-                height: 40px;
-            }
-        }
-        .carousel-inner img {
-            width: 100%;
-            height: auto;
-            max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+        .card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="slogan.png" alt="Chrispatech Logo" class="img-fluid">
-            </a>
+            <a class="navbar-brand" href="#"><i class="bi bi-briefcase-fill me-2"></i>Mi Sitio Llamativo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#inicio">Inicio</a>
-                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCatalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Catálogo
+                        <a class="nav-link dropdown-toggle" href="#" id="menu1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-house-door me-1"></i>Menú 1
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCatalogo">
-                            <li><a class="dropdown-item" href="#catalogo1">Catálogo 1</a></li>
-                            <li><a class="dropdown-item" href="#catalogo2">Catálogo 2</a></li>
-                            <li><a class="dropdown-item" href="#catalogo3">Catálogo 3</a></li>
-                            <li><a class="dropdown-item" href="#catalogo4">Catálogo 4</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="menu1">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.1</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.2</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.3</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.4</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Submenú 1.5</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownHerramientas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Herramientas
+                        <a class="nav-link dropdown-toggle" href="#" id="menu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-people me-1"></i>Menú 2
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownHerramientas">
-                            <li><a class="dropdown-item" href="#Herramienta QR">Generar QR</a></li>
-                            <li><a class="dropdown-item" href="#herramienta2">Herramienta 2</a></li>
-                            <li><a class="dropdown-item" href="#herramienta3">Herramienta 3</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="menu2">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.1</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.2</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.3</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.4</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Submenú 2.5</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contacto">Contacto</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="menu3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear me-1"></i>Menú 3
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="menu3">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.1</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.2</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.3</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.4</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Submenú 3.5</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="menu4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-chat-dots me-1"></i>Menú 4
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="menu4">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.1</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.2</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.3</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.4</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Submenú 4.5</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main>
-        <section id="inicio" class="section-content">
-            <div class="container">
-                <!-- Carrusel de imágenes -->
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="Tareas.png" class="d-block w-100" alt="Imagen 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="tecnico.png" class="d-block w-100" alt="Imagen 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="programacion.png" class="d-block w-100" alt="Imagen 3">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
-                </div>
-                <!-- Fin del carrusel de imágenes -->
-                
-                <div class="row mt-4">
-                    <div class="col-lg-8 mx-auto">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h2 class="card-title">Misión</h2>
-                                <p class="card-text justified-text">Nuestra misión en Chrispatech es proporcionar servicios técnicos de alta calidad y accesorios innovadores para satisfacer las necesidades tecnológicas de nuestros clientes, garantizando soluciones eficientes y un servicio excepcional.</p>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h2 class="card-title">Visión</h2>
-                                <p class="card-text justified-text">Ser líderes en el sector de servicio técnico y accesorios tecnológicos, reconocidos por nuestra excelencia, innovación y compromiso con la satisfacción del cliente, adaptándonos constantemente a las nuevas tecnologías y tendencias del mercado.</p>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h2 class="card-title">Quiénes Somos</h2>
-                                <p class="card-text justified-text">Somos un equipo de profesionales apasionados por la tecnología, dedicados a ofrecer soluciones técnicas y accesorios de calidad. En Chrispatech, combinamos experiencia técnica con un servicio al cliente excepcional para asegurar que cada cliente reciba la mejor atención y los productos más adecuados para sus necesidades.</p>
-                            </div>
-                        </div>
+    <div class="hero">
+        <div class="container text-center">
+            <h1 class="display-4">Bienvenido a Mi Sitio Llamativo</h1>
+            <p class="lead">Un ejemplo de página web con un menú atractivo usando Bootstrap</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-graph-up text-primary me-2"></i>Características</h5>
+                        <p class="card-text">Descubre las increíbles características de nuestro sitio.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-people text-success me-2"></i>Comunidad</h5>
+                        <p class="card-text">Únete a nuestra creciente comunidad de usuarios.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-question-circle text-info me-2"></i>Soporte</h5>
+                        <p class="card-text">Obtén ayuda cuando la necesites, estamos aquí para ti.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Bootstrap Bundle with Popper -->
+    <!-- Bootstrap Bundle con Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
