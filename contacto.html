@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web Personalizado</title>
+    <title>Contacto - Mi Sitio Web Personalizado</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -23,37 +23,31 @@
         .nav-link:hover {
             color: #ffd700 !important;
         }
-        .dropdown-menu {
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,.1);
-        }
-        .dropdown-item:hover {
-            background-color: #4a90e2;
-            color: white;
-        }
         .hero {
             background: linear-gradient(45deg, #4a90e2, #79c7c5);
             color: white;
             padding: 4rem 0;
             margin-bottom: 2rem;
         }
-        .card {
+        .contact-card {
             transition: transform 0.3s;
             margin-bottom: 1rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
         }
-        .card:hover {
+        .contact-card:hover {
             transform: translateY(-5px);
         }
-        .logo-placeholder {
-            width: 150px;
-            height: 50px;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .social-icons a {
             color: #4a90e2;
-            font-weight: bold;
-            border-radius: 5px;
+            font-size: 2rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #ffd700;
         }
     </style>
 </head>
@@ -61,7 +55,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="slogan.png" alt="Logo" width="100" height="50" class="d-inline-block align-text-top">
+                <img src="slogan.png" alt="Logo" width="110" height="50" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -69,7 +63,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="bi bi-house-door me-2"></i>Inicio</a>
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,12 +80,9 @@
                             <i class="bi bi-tools me-2"></i>Herramientas
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="herramientasDropdown">
-                            <li><a class="dropdown-item" href="qrfile.html"><i class="bi bi-qr-code me-2"></i>Generador de QR</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2"></i>Videos</a></li>
+                            <li><a class="dropdown-item" href="qr.html"><i class="bi bi-qr-code me-2"></i>Generador de QR</a></li>
+                            <li><a class="dropdown-item" href="contacto.html"><i class="bi bi-envelope me-2"></i>Contacto</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html"><i class="bi bi-envelope me-2"></i>Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -100,39 +91,32 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4">Bienvenido a Mi Sitio Web</h1>
-            <p class="lead">Descubre nuestro catálogo y herramientas útiles</p>
+            <h1 class="display-4">Contáctanos</h1>
+            <p class="lead">Estamos aquí para ayudarte. ¡Conéctate con nosotros a través de nuestras redes sociales!</p>
         </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-grid text-primary me-2"></i>Catálogo</h5>
-                        <p class="card-text">Explora nuestra amplia gama de productos y servicios.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-tools text-success me-2"></i>Herramientas</h5>
-                        <p class="card-text">Utiliza nuestras herramientas para mejorar tu experiencia.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-envelope text-info me-2"></i>Contacto</h5>
-                        <p class="card-text">Estamos aquí para ayudarte. ¡Contáctanos!</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="contact-card text-center">
+                    <h2>Síguenos en nuestras redes sociales</h2>
+                    <p>Estaremos encantados de atenderte a través de cualquiera de nuestras plataformas.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="https://www.youtube.com" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="bg-dark text-white text-center py-2 mt-4">
+        <p>Contáctanos en cualquiera de nuestras redes sociales</p>
+    </footer>
 
     <!-- Bootstrap Bundle con Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
