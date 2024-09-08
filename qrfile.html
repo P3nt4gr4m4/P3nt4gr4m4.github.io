@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Código QR</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Librería QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Librería FileSaver.js para la descarga -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Generador de Código QR -->
+    <section class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <label for="texto">Texto o URL:</label>
+                <input type="text" id="texto" class="form-control" placeholder="Ingrese el texto o la URL">
+                <br>
+                <button onclick="generarQR()" class="btn btn-primary">Generar QR</button>
+                <button onclick="limpiarQR()" class="btn btn-secondary">Limpiar</button>
+                <!-- Botón "Descargar QR" -->
+                <button id="descargarBtn" onclick="descargarQR()" class="btn btn-success" disabled>Descargar QR</button>
+                <br><br>
+                <div id="codigoQR"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para ingresar el nombre del archivo -->
+    <div class="modal fade" id="nombreArchivoModal" tabindex="-1" role="dialog" aria-labelledby="nombreArchivoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nombreArchivoModalLabel">Guardar como...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="nombreArchivo">Nombre del archivo:</label>
+                    <input type="text" id="nombreArchivo" class="form-control" placeholder="Nombre del archivo">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarQR()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Chrispatech Mod</p>
+    </footer>
+
+    <!-- Script para el generador de Código QR -->
+    <script>
+        let qrCodeInstance = null; // Variable para almacenar la instancia del código QR
+
+        function generarQR() {
+            const texto = document.getElementById('texto').value;
+            const codigoQR = document.getElementById('codigoQR');
+            
+            if (qrCodeInstance) {
+                qrCodeInstance.clear(); // Limpia el código QR existente
+                qrCodeInstance.makeCode(texto); // Genera uno nuevo con el nuevo texto
+            } else {
+                qrCodeInstance = new QRCode(codigoQR, {
+                    text: texto,
+                    width: 180,
+                    height: 180
+                });
+            }
+
+            // Habilita el botón de "Descargar QR"
+            document.getElementById('descargarBtn').removeAttribute('disabled');
+        }
+
+        function limpiarQR() {
+            const codigoQR = document.getElementById('codigoQR');
+            codigoQR.innerHTML = ''; // Limpia el contenido del código QR
+            document.getElementById('texto').value = ''; // Limpia el campo de texto
+            qrCodeInstance = null; // Limpia la instancia
+            // Deshabilita el botón de "Descargar QR"
+            document.getElementById('descargarBtn').setAttribute('disabled', 'true');
+        }
+
+        function descargarQR() {
+            // Abre el cuadro de diálogo para ingresar el nombre del archivo
+            $('#nombreArchivoModal').modal('show');
+        }
+
+        function guardarQR() {
+            const nombreArchivo = document.getElementById('nombreArchivo').value;
+            if (nombreArchivo) {
+                const codigoQR = document.getElementById('codigoQR');
+                const canvas = codigoQR.querySelector('canvas');
+                if (canvas) {
+                    // Convierte el código QR en una imagen PNG y la descarga con el nombre especificado
+                    canvas.toBlob(function(blob) {
+                        saveAs(blob, nombreArchivo + '.png');
+                    });
+                }
+            }
+            // Cierra el cuadro de diálogo
+            $('#nombreArchivoModal').modal('hide');
+        }
+    </script>
+
+    <!-- Bootstrap Bundle con Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
