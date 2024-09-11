@@ -51,7 +51,6 @@
             color: red;
             font-weight: bold;
         }
-        /* Oculta inicialmente la barra de progreso */
         .progress {
             display: none;
         }
@@ -61,7 +60,6 @@
             const selectedFormat = document.getElementById("format").value;
             const videoUrl = document.getElementById("videoUrl").value;
 
-            // Validar que el usuario haya ingresado un URL
             if (!videoUrl) {
                 document.getElementById("result").innerText = "Por favor, ingresa una URL de YouTube.";
                 return;
@@ -74,66 +72,89 @@
             progressBar.style.width = "30%";
             progressBar.innerText = "Buscando...";
 
-            // Usamos un proxy público para sortear el problema de CORS
             const proxyUrl = "https://api.allorigins.win/get?url=";
             const apiUrl = `https://loader.to/ajax/download.php?format=${selectedFormat}&url=${encodeURIComponent(videoUrl)}`;
 
             try {
-                // Actualizar progreso
                 progressBar.style.width = "50%";
                 progressBar.innerText = "Obteniendo ID del video...";
 
                 const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
                 const data = await response.json();
-                const jsonData = JSON.parse(data.contents); // Datos reales del servicio
+                const jsonData = JSON.parse(data.contents); // Datos del servicio loader.to
 
+                // Verificar si el ID fue obtenido exitosamente
                 if (jsonData.success) {
                     const downloadId = jsonData.id;
                     const imageUrl = jsonData.info.image;
                     const title = jsonData.info.title;
 
-                    document.getElementById("result").innerText = "ID: " + downloadId;
-
-                    // Mostrar la imagen en el visor y el título
+                    // Mostrar detalles del video
+                    document.getElementById("result").innerText = "Video encontrado, ID: " + downloadId;
                     document.getElementById("thumbnail").src = imageUrl;
                     document.getElementById("thumbnail").style.display = 'block';
                     document.getElementById("videoTitle").innerText = title;
 
-                    // Actualizar progreso
                     progressBar.style.width = "70%";
-                    progressBar.innerText = "Generando enlace de descarga...";
+                    progressBar.innerText = "Esperando el enlace de descarga...";
 
-                    // Fetch the download URL using the id
-                    const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
-                    const progressResponse = await fetch(proxyUrl + encodeURIComponent(progressUrl));
-                    const progressData = await progressResponse.json();
-                    const progressJson = JSON.parse(progressData.contents);
-
-                    // Asegúrate de que `download_url` sea válido
-                    if (progressJson.download_url) {
-                        const downloadUrl = progressJson.download_url.replace(/\\/g, ''); // Elimina las barras invertidas
-                        document.getElementById("downloadBtn").href = downloadUrl;
-                        document.getElementById("downloadBtn").style.display = 'inline-block';
-
-                        // Actualizar progreso al 100%
-                        progressBar.style.width = "100%";
-                        progressBar.innerText = "Enlace listo!";
-                    } else {
-                        document.getElementById("result").innerText = "No se pudo obtener la URL de descarga.";
-                        progressBar.style.width = "0%";
-                        progressBar.innerText = "Error.";
-                    }
+                    // Llamar a la función para obtener el enlace de descarga
+                    await checkProgress(downloadId);
                 } else {
-                    document.getElementById("result").innerText = "No se pudo obtener el ID.";
+                    document.getElementById("result").innerText = "No se pudo obtener el ID del video.";
                     progressBar.style.width = "0%";
                     progressBar.innerText = "Error.";
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
-                document.getElementById("result").innerText = "Ocurrió un error.";
+                console.error("Error al obtener los datos:", error);
+                document.getElementById("result").innerText = "Ocurrió un error al procesar la solicitud.";
                 progressBar.style.width = "0%";
                 progressBar.innerText = "Error.";
             }
+        }
+
+        // Función para verificar repetidamente si la URL de descarga está lista
+        async function checkProgress(downloadId) {
+            const proxyUrl = "https://api.allorigins.win/get?url=";
+            const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
+            const maxAttempts = 10;
+            let attempt = 0;
+            const progressBar = document.getElementById("progressBar");
+
+            while (attempt < maxAttempts) {
+                try {
+                    const progressResponse = await fetch(proxyUrl + encodeURIComponent(progressUrl));
+                    const progressData = await progressResponse.json();
+                    const progressJson = JSON.parse(progressData.contents);
+
+                    if (progressJson.download_url) {
+                        const downloadUrl = progressJson.download_url.replace(/\\/g, ''); // Eliminar barras invertidas si las hay
+                        document.getElementById("downloadBtn").href = downloadUrl;
+                        document.getElementById("downloadBtn").style.display = 'inline-block';
+
+                        progressBar.style.width = "100%";
+                        progressBar.innerText = "Enlace listo para descargar!";
+                        document.getElementById("result").innerText = "Enlace de descarga obtenido correctamente.";
+                        return;
+                    } else {
+                        // Actualizar la barra de progreso mientras espera
+                        attempt++;
+                        progressBar.style.width = `${70 + attempt * 3}%`;
+                        progressBar.innerText = `Esperando el enlace de descarga... (Intento ${attempt})`;
+                        await new Promise(resolve => setTimeout(resolve, 3000)); // Esperar 3 segundos antes de volver a intentar
+                    }
+                } catch (error) {
+                    console.error("Error al verificar el progreso:", error);
+                    document.getElementById("result").innerText = "Error al intentar obtener la URL de descarga.";
+                    progressBar.style.width = "0%";
+                    progressBar.innerText = "Error.";
+                    return;
+                }
+            }
+
+            document.getElementById("result").innerText = "No se pudo obtener la URL de descarga después de varios intentos.";
+            progressBar.style.width = "0%";
+            progressBar.innerText = "Error.";
         }
     </script>
 </head>
