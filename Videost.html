@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargar Video de YouTube</title>
+    <title>POST Request Example</title>
 </head>
 <body>
-    <h1>Descargar Video de YouTube</h1>
-    <form action="https://www.y2mate.com/mates/convertV2/index" method="POST">
-        <label for="vid">ID del Video:</label>
-        <input type="text" id="vid" name="vid" value="IfAEpWw-KUg" readonly><br><br>
+    <h1>Submit Payload</h1>
+    <form action="https://www.y2mate.com/mates/en948/analyzeV2/ajax" method="POST">
+        <label for="k_query">k_query:</label><br>
+        <input type="text" id="k_query" name="k_query" value="https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIfAEpWw-KUg"><br><br>
 
-        <label for="k">Payload:</label>
-        <textarea id="k" name="k" rows="4" cols="50" readonly>
-joMdWYfmk56gasL176vV8sSvAl7j4vJ3hNgqkwx0U/tc5qUJy7D1bZsdeuldncTzRY9I+C6MbYPSaA==
-        </textarea><br><br>
+        <label for="k_page">k_page:</label><br>
+        <input type="text" id="k_page" name="k_page" value="home"><br><br>
 
-        <button type="submit">Descargar Video</button>
+        <label for="hl">hl:</label><br>
+        <input type="text" id="hl" name="hl" value="en"><br><br>
+
+        <label for="q_auto">q_auto:</label><br>
+        <input type="text" id="q_auto" name="q_auto" value="0"><br><br>
+
+        <input type="submit" value="Submit">
     </form>
 </body>
 </html>
