@@ -96,10 +96,11 @@
                     document.getElementById("videoTitle").innerText = title;
 
                     progressBar.style.width = "70%";
-                    progressBar.innerText = "Esperando el enlace de descarga...";
+                    progressBar.innerText = "Esperando la URL de descarga...";
 
-                    // Llamar a la función para obtener el enlace de descarga
-                    await checkProgress(downloadId);
+                    // Iniciar sondeo para obtener la URL de descarga
+                    pollDownloadUrl(downloadId, progressBar);
+
                 } else {
                     document.getElementById("result").innerText = "No se pudo obtener el ID del video.";
                     progressBar.style.width = "0%";
@@ -113,48 +114,35 @@
             }
         }
 
-        // Función para verificar repetidamente si la URL de descarga está lista
-        async function checkProgress(downloadId) {
+        // Función para hacer sondeo (polling) hasta que la URL de descarga esté lista
+        async function pollDownloadUrl(downloadId, progressBar) {
             const proxyUrl = "https://api.allorigins.win/get?url=";
             const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
-            const maxAttempts = 10;
-            let attempt = 0;
-            const progressBar = document.getElementById("progressBar");
 
-            while (attempt < maxAttempts) {
+            // Intentar obtener la URL de descarga cada 5 segundos hasta que esté lista
+            const pollInterval = setInterval(async () => {
                 try {
                     const progressResponse = await fetch(proxyUrl + encodeURIComponent(progressUrl));
                     const progressData = await progressResponse.json();
                     const progressJson = JSON.parse(progressData.contents);
 
                     if (progressJson.download_url) {
-                        const downloadUrl = progressJson.download_url.replace(/\\/g, ''); // Eliminar barras invertidas si las hay
+                        // URL de descarga obtenida
+                        const downloadUrl = progressJson.download_url.replace(/\\/g, ''); // Eliminar barras invertidas
                         document.getElementById("downloadBtn").href = downloadUrl;
                         document.getElementById("downloadBtn").style.display = 'inline-block';
 
+                        // Actualizar progreso al 100% y detener el sondeo
                         progressBar.style.width = "100%";
                         progressBar.innerText = "Enlace listo para descargar!";
-                        document.getElementById("result").innerText = "Enlace de descarga obtenido correctamente.";
-                        return;
+                        clearInterval(pollInterval);
                     } else {
-                        // Actualizar la barra de progreso mientras espera
-                        attempt++;
-                        progressBar.style.width = `${70 + attempt * 3}%`;
-                        progressBar.innerText = `Esperando el enlace de descarga... (Intento ${attempt})`;
-                        await new Promise(resolve => setTimeout(resolve, 3000)); // Esperar 3 segundos antes de volver a intentar
+                        console.log("La URL de descarga aún no está disponible. Reintentando...");
                     }
                 } catch (error) {
-                    console.error("Error al verificar el progreso:", error);
-                    document.getElementById("result").innerText = "Error al intentar obtener la URL de descarga.";
-                    progressBar.style.width = "0%";
-                    progressBar.innerText = "Error.";
-                    return;
+                    console.error("Error al obtener la URL de descarga:", error);
                 }
-            }
-
-            document.getElementById("result").innerText = "No se pudo obtener la URL de descarga después de varios intentos.";
-            progressBar.style.width = "0%";
-            progressBar.innerText = "Error.";
+            }, 5000); // Revisar cada 5 segundos
         }
     </script>
 </head>
