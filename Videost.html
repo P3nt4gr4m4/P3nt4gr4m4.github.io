@@ -15,11 +15,16 @@
             
             // Genera la URL de descarga
             const downloadURL = `https://loader.to/ajax/download.php?format=${formato}&url=${encodeURIComponent(urlVideo)}`;
-            
+            console.log("URL generada para la solicitud:", downloadURL);  // Muestra la URL generada
+
             // Realiza una solicitud AJAX para obtener el ID de descarga
             fetch(downloadURL)
-                .then(response => response.json())
+                .then(response => {
+                    console.log("Respuesta recibida:", response);  // Muestra la respuesta completa
+                    return response.json();
+                })
                 .then(data => {
+                    console.log("Datos recibidos del servidor:", data);  // Muestra los datos recibidos
                     if (data.success && data.id) {
                         const progressID = data.id; // Extraemos el ID del resultado
                         const progressURL = `https://p.oceansaver.in/ajax/progress.php?id=${progressID}`;
@@ -27,7 +32,7 @@
                         document.getElementById("linkDescarga").style.display = "block";
                         document.getElementById("linkDescarga").innerText = `Ver progreso de descarga (ID: ${progressID})`;
                     } else {
-                        alert("Error al generar el ID de descarga.");
+                        alert("Error al generar el ID de descarga. Verifica la respuesta.");
                     }
                 })
                 .catch(error => {
@@ -38,7 +43,7 @@
     </script>
 </head>
 <body>
-    <h1> Video de YouTube</h1>
+    <h1>Descargar Video de YouTube</h1>
 
     <label for="formato">Selecciona el formato:</label>
     <select id="formato">
