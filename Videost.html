@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargar Videos de YouTube</title>
+    <title>Descargar Videos de YouTube Educativamente</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,7 +34,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
         }
         button:hover {
             background-color: #45a049;
@@ -45,75 +44,73 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        #download-link {
-            display: none;
-            margin-top: 20px;
-        }
-        #error-message {
-            color: red;
-            display: none;
-            margin-top: 20px;
-        }
         footer {
             margin-top: 30px;
             font-size: 14px;
             color: #999;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3fe;
+            border: 1px solid #b3d4fc;
+            border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Descargar Videos de YouTube</h1>
-        <p>Introduce la URL del video de YouTube para descargarlo de manera educativa y respetuosa con los derechos de autor.</p>
+        <h1>Descargar Videos de YouTube Educativamente</h1>
+        <p>Introduce la URL del video de YouTube y obtén el enlace de descarga.</p>
 
-        <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=Ejemplo" required><br>
+        <input type="text" id="video_url" placeholder="https://www.youtube.com/watch?v=Ejemplo" required><br><br>
         <button onclick="downloadVideo()">Descargar Video</button>
 
-        <div id="download-link">
-            <a id="link" href="#" target="_blank">Haz clic aquí para descargar el video</a>
-        </div>
-        <div id="error-message">
-            <p>Hubo un error al intentar descargar el video. Por favor, verifica la URL y vuelve a intentarlo.</p>
+        <div class="result" id="result">
+            <h3>Enlaces de descarga:</h3>
+            <p id="download_links"></p>
         </div>
     </div>
 
     <footer>
-        <p>Recuerda respetar los derechos de autor. Esta herramienta es solo para uso educativo.</p>
+        <p>Recuerda respetar los derechos de autor. Esta herramienta es solo para fines educativos.</p>
     </footer>
 
     <script>
-        async function downloadVideo() {
-            const videoUrl = document.getElementById('videoUrl').value;
-            const downloadLinkDiv = document.getElementById('download-link');
-            const errorMessage = document.getElementById('error-message');
-            const linkElement = document.getElementById('link');
-
-            downloadLinkDiv.style.display = 'none';
-            errorMessage.style.display = 'none';
+        function downloadVideo() {
+            const videoUrl = document.getElementById('video_url').value;
 
             if (!videoUrl) {
                 alert('Por favor, introduce una URL válida de YouTube.');
                 return;
             }
 
-            try {
-                const response = await fetch(`https://backend.svcenter.xyz/api/info?url=${encodeURIComponent(videoUrl)}`);
-                const data = await response.json();
+            // Llamada a la API usando fetch
+            fetch(`https://backend.svcenter.xyz/api?url=${videoUrl}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Mostrar los enlaces de descarga
+                    const resultDiv = document.getElementById('result');
+                    const downloadLinks = document.getElementById('download_links');
 
-                if (data.success && data.data && data.data[0]) {
-                    const downloadUrl = data.data[0].url; // Primer enlace de descarga
+                    if (data && data.success) {
+                        const links = data.formats.map(format => 
+                            `<a href="${format.url}" target="_blank">${format.quality} - ${format.format}</a>`
+                        ).join('<br>');
 
-                    linkElement.href = downloadUrl;
-                    linkElement.textContent = 'Haz clic aquí para descargar el video';
-                    downloadLinkDiv.style.display = 'block';
-                } else {
-                    errorMessage.style.display = 'block';
-                }
-            } catch (error) {
-                errorMessage.style.display = 'block';
-                console.error('Error al intentar descargar el video:', error);
-            }
+                        downloadLinks.innerHTML = links;
+                        resultDiv.style.display = 'block';
+                    } else {
+                        downloadLinks.innerHTML = 'Error al obtener los enlaces de descarga.';
+                        resultDiv.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al llamar a la API:', error);
+                    alert('Ocurrió un error al intentar descargar el video.');
+                });
         }
     </script>
 
