@@ -20,10 +20,12 @@
             fetch(downloadURL)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.id) {
-                        const progressURL = `https://p.oceansaver.in/ajax/progress.php?id=${data.id}`;
+                    if (data.success && data.id) {
+                        const progressID = data.id; // Extraemos el ID del resultado
+                        const progressURL = `https://p.oceansaver.in/ajax/progress.php?id=${progressID}`;
                         document.getElementById("linkDescarga").href = progressURL;
                         document.getElementById("linkDescarga").style.display = "block";
+                        document.getElementById("linkDescarga").innerText = `Ver progreso de descarga (ID: ${progressID})`;
                     } else {
                         alert("Error al generar el ID de descarga.");
                     }
@@ -36,7 +38,7 @@
     </script>
 </head>
 <body>
-    <h1>Descargar Video de YouTube</h1>
+    <h1> Video de YouTube</h1>
 
     <label for="formato">Selecciona el formato:</label>
     <select id="formato">
