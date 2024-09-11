@@ -109,8 +109,9 @@
                     const progressData = await progressResponse.json();
                     const progressJson = JSON.parse(progressData.contents);
 
+                    // Asegúrate de que `download_url` sea válido
                     if (progressJson.download_url) {
-                        const downloadUrl = progressJson.download_url;
+                        const downloadUrl = progressJson.download_url.replace(/\\/g, ''); // Elimina las barras invertidas
                         document.getElementById("downloadBtn").href = downloadUrl;
                         document.getElementById("downloadBtn").style.display = 'inline-block';
 
