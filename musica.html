@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Descargar Música - Mi Sitio Web Personalizado</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -23,39 +23,85 @@
         .nav-link:hover {
             color: #ffd700 !important;
         }
-        .dropdown-menu {
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,.1);
-        }
-        .dropdown-item:hover {
-            background-color: #4a90e2;
-            color: white;
-        }
         .hero {
             background: linear-gradient(45deg, #4a90e2, #79c7c5);
             color: white;
             padding: 4rem 0;
             margin-bottom: 2rem;
         }
-        .card {
-            transition: transform 0.3s;
-            margin-bottom: 1rem;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .logo-placeholder {
-            width: 150px;
-            height: 50px;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4a90e2;
+        .btn-custom {
+            background-color: #4a90e2;
+            color: white;
             font-weight: bold;
+            padding: 10px 20px;
             border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-custom:hover {
+            background-color: #357ABD;
+            text-decoration: none;
+            color: white;
+        }
+        #result {
+            display: block;
+            color: red;
+            font-weight: bold;
+        }
+        .progress {
+            display: none;
         }
     </style>
+    <script>
+        async function getMusicDownload() {
+            const videoUrl = document.getElementById("musicUrl").value;
+
+            if (!videoUrl) {
+                document.getElementById("result").innerText = "Por favor, ingresa una URL de YouTube.";
+                return;
+            }
+
+            // Mostrar barra de progreso y reiniciarla
+            const progressBar = document.getElementById("progressBar");
+            const progressContainer = document.getElementById("progressContainer");
+            progressContainer.style.display = "block";
+            progressBar.style.width = "30%";
+            progressBar.innerText = "Buscando...";
+
+            // API de loader.to para descargar MP3
+            const proxyUrl = "https://api.allorigins.win/get?url=";
+            const apiUrl = `https://loader.to/ajax/download.php?format=mp3&url=${encodeURIComponent(videoUrl)}`;
+
+            try {
+                progressBar.style.width = "50%";
+                progressBar.innerText = "Obteniendo enlace de descarga...";
+
+                const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
+                const data = await response.json();
+                const jsonData = JSON.parse(data.contents); // Datos del servicio loader.to
+
+                // Verificar si el enlace fue obtenido exitosamente
+                if (jsonData.success) {
+                    const downloadUrl = jsonData.id;
+                    document.getElementById("result").innerText = "Enlace de descarga obtenido.";
+                    document.getElementById("downloadBtn").href = `https://loader.to/ajax/progress.php?id=${downloadUrl}`;
+                    document.getElementById("downloadBtn").style.display = 'inline-block';
+
+                    progressBar.style.width = "100%";
+                    progressBar.innerText = "Enlace listo para descargar!";
+                } else {
+                    document.getElementById("result").innerText = "No se pudo obtener el enlace de descarga.";
+                    progressBar.style.width = "0%";
+                    progressBar.innerText = "Error.";
+                }
+            } catch (error) {
+                console.error("Error al obtener los datos:", error);
+                document.getElementById("result").innerText = "Ocurrió un error al procesar la solicitud.";
+                progressBar.style.width = "0%";
+                progressBar.innerText = "Error.";
+            }
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -69,7 +115,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Inicio</a>
+                        <a class="nav-link" href="index.html"><i class="bi bi-house-door me-2"></i>Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,7 +136,8 @@
                             <li><a class="dropdown-item" href="musica.html"><i class="bi bi-music-note me-2"></i>Música MP3</a></li>
                             <li><a class="dropdown-item" href="Videost.html"><i class="bi bi-camera-video me-2"></i>Videos</a></li>
                             <li><a class="dropdown-item" href="herramientas.html"><i class="bi bi-code-slash me-2"></i>Software/Scripts</a></li>
-                   
+                          
+
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -103,39 +150,31 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4">Bienvenido a Mi Sitio Web</h1>
-            <p class="lead">Descubre nuestro catálogo y herramientas útiles</p>
+            <h1 class="display-4">Descargar Música de YouTube</h1>
+            <p class="lead">Ingresa la URL y descarga el audio en formato MP3</p>
         </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-grid text-primary me-2"></i>Catálogo</h5>
-                        <p class="card-text">Explora nuestra amplia gama de productos y servicios.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-tools text-success me-2"></i>Herramientas</h5>
-                        <p class="card-text">Utiliza nuestras herramientas para mejorar tu experiencia.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-envelope text-info me-2"></i>Contacto</h5>
-                        <p class="card-text">¿Tienes preguntas o necesitas asistencia? ¡Estamos aquí para ayudarte!. ¡Contáctanos!</p>
-                    </div>
-                </div>
-            </div>
+        <label for="musicUrl">Ingresa la URL de YouTube:</label>
+        <input type="text" id="musicUrl" placeholder="https://www.youtube.com/watch?v=sqHTDUfJLOY" size="50">
+        <br><br>
+
+        <p id="result">Haz clic en el botón para obtener el enlace de descarga.</p>
+
+        <div style="display: flex; gap: 10px;">
+            <button class="btn-custom" onclick="getMusicDownload()">Obtener MP3</button>
+            <a id="downloadBtn" href="#" class="btn-custom" style="display: none;" download>Descargar MP3</a>
+        </div>
+        <br><br>
+
+        <!-- Barra de progreso -->
+        <div class="progress" id="progressContainer">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" role="progressbar" style="width: 0%">Buscando...</div>
         </div>
     </div>
+
+    
 
     <!-- Bootstrap Bundle con Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
