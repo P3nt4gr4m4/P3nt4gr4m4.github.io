@@ -3,51 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertidor YouTube</title>
+    <title>Descargar Video de YouTube</title>
 </head>
 <body>
+    <h1>Descargar Video de YouTube</h1>
+    <form action="https://www.y2mate.com/mates/convertV2/index" method="POST">
+        <label for="vid">ID del Video:</label>
+        <input type="text" id="vid" name="vid" value="YEqWLCBrgic" readonly><br><br>
 
-    <h1>Convertidor de YouTube a MP4</h1>
-    <form id="convertForm">
-        <label for="url">Enlace de YouTube:</label>
-        <input type="text" id="url" name="url" placeholder="Ingresa el enlace de YouTube">
-        <button type="submit">Convertir</button>
+        <label for="k">Payload:</label>
+        <textarea id="k" name="k" rows="4" cols="50" readonly>
+joMdWYfmk56gasL176vV8sSvAl7j4vJ3hNgqkwx0U/tc5qUJy7D1bZsdeuldncTzRY9I+C6MbYPSaA==
+        </textarea><br><br>
+
+        <button type="submit">Descargar Video</button>
     </form>
-
-    <div id="result"></div>
-
-    <script>
-        // Función para manejar el envío del formulario
-        document.getElementById('convertForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita que se recargue la página
-
-            // Obtener el valor ingresado por el usuario
-            const youtubeURL = document.getElementById('url').value;
-
-            // Crear el payload con el formato adecuado
-            const payload = new URLSearchParams();
-            payload.append('query', youtubeURL);
-            payload.append('vt', 'mp4');
-
-            // Hacer la solicitud POST con fetch
-            fetch('https://9convert.com/api/ajaxSearch/index', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: payload
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Mostrar la respuesta de la API en el div de resultado
-                document.getElementById('result').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('result').innerHTML = 'Error al procesar la solicitud';
-            });
-        });
-    </script>
-
 </body>
 </html>
