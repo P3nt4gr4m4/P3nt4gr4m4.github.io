@@ -3,43 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargar videos de YouTube</title>
+    <title>Convertidor YouTube</title>
 </head>
 <body>
-    <h1>Descargar videos de YouTube</h1>
-    <form id="downloadForm">
-        <label for="videoUrl">Ingresa el enlace del video de YouTube:</label><br>
-        <input type="text" id="videoUrl" name="videoUrl" placeholder="https://www.youtube.com/watch?v=..." required><br><br>
-        <button type="submit">Descargar Video</button>
+
+    <h1>Convertidor de YouTube a MP4</h1>
+    <form id="convertForm">
+        <label for="url">Enlace de YouTube:</label>
+        <input type="text" id="url" name="url" placeholder="Ingresa el enlace de YouTube">
+        <button type="submit">Convertir</button>
     </form>
 
-    <div id="downloadLink" style="margin-top: 20px;"></div>
+    <div id="result"></div>
 
     <script>
-        document.getElementById('downloadForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const videoUrl = document.getElementById('videoUrl').value;
+        // Función para manejar el envío del formulario
+        document.getElementById('convertForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que se recargue la página
 
-            // Validar el URL del video
-            if (!videoUrl.includes("youtube.com/watch")) {
-                alert("Por favor ingrese un enlace válido de YouTube.");
-                return;
-            }
+            // Obtener el valor ingresado por el usuario
+            const youtubeURL = document.getElementById('url').value;
 
-            // Aquí podrías integrar la API o el servicio de terceros para procesar la descarga.
-            fetch(`https://api.example.com/download?videoUrl=${encodeURIComponent(videoUrl)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('downloadLink').innerHTML = `<a href="${data.downloadUrl}" target="_blank">Haz clic aquí para descargar el video</a>`;
-                    } else {
-                        document.getElementById('downloadLink').textContent = "Error al descargar el video.";
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('downloadLink').textContent = "Ocurrió un error.";
-                });
+            // Crear el payload con el formato adecuado
+            const payload = new URLSearchParams();
+            payload.append('query', youtubeURL);
+            payload.append('vt', 'mp4');
+
+            // Hacer la solicitud POST con fetch
+            fetch('https://9convert.com/api/ajaxSearch/index', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Mostrar la respuesta de la API en el div de resultado
+                document.getElementById('result').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 'Error al procesar la solicitud';
+            });
         });
     </script>
+
 </body>
 </html>
