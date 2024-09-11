@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videos - Mi Sitio Web Personalizado</title>
+    <title>Convertidor de videos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -32,22 +32,6 @@
         .video-section {
             margin-bottom: 2rem;
         }
-        .video-frame {
-            width: 100%;
-            height: 315px;
-            border-radius: 8px;
-        }
-        .card {
-            transition: transform 0.3s;
-            margin-bottom: 1rem;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card-title {
-            font-size: 1.5rem;
-            color: #4a90e2;
-        }
         .btn-custom {
             background-color: #4a90e2;
             color: white;
@@ -62,41 +46,10 @@
             text-decoration: none;
             color: white;
         }
-        /* Estilos del modal */
-        .modal {
+        #result {
             display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
+            color: red;
             font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
         }
     </style>
     <script>
@@ -104,18 +57,16 @@
             const selectedFormat = document.getElementById("format").value;
             const videoUrl = document.getElementById("videoUrl").value;
 
-            // Validar que el usuario haya ingresado una URL
             if (!videoUrl) {
-                showModal("Por favor, ingresa una URL de YouTube.");
+                document.getElementById("result").innerText = "Por favor, ingresa una URL de YouTube.";
+                document.getElementById("result").style.display = 'block'; 
                 return;
             }
 
             const apiUrl = `https://loader.to/ajax/download.php?format=${selectedFormat}&url=${encodeURIComponent(videoUrl)}`;
 
             try {
-                const response = await fetch(apiUrl, {
-                    method: "GET"
-                });
+                const response = await fetch(apiUrl, { method: "GET" });
                 const data = await response.json();
                 
                 if (data.success) {
@@ -123,40 +74,33 @@
                     const imageUrl = data.info.image;
                     const title = data.info.title;
 
-                    // Mostrar la imagen en el visor y el título
+                    document.getElementById("result").innerText = "ID: " + downloadId;
+                    document.getElementById("result").style.display = 'block'; 
+
                     document.getElementById("thumbnail").src = imageUrl;
                     document.getElementById("thumbnail").style.display = 'block';
                     document.getElementById("videoTitle").innerText = title;
 
-                    // Fetch the download URL using the id
                     const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
                     const progressResponse = await fetch(progressUrl);
                     const progressData = await progressResponse.json();
 
-                    // Verificar si hay una URL de descarga disponible
                     if (progressData.download_url) {
                         const downloadUrl = progressData.download_url;
                         document.getElementById("downloadBtn").href = downloadUrl;
-                        document.getElementById("downloadBtn").style.display = 'inline-block'; // Mostrar el botón de descarga
+                        document.getElementById("downloadBtn").style.display = 'inline-block';
                     } else {
-                        showModal("El formato seleccionado no está disponible. Por favor, selecciona otro formato.");
+                        document.getElementById("result").innerText = "No se pudo obtener la URL de descarga.";
                     }
                 } else {
-                    showModal("No se pudo obtener el ID del video.");
+                    document.getElementById("result").innerText = "No se pudo obtener el ID.";
+                    document.getElementById("result").style.display = 'block';
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
-                showModal("Ocurrió un error al procesar la solicitud.");
+                document.getElementById("result").innerText = "Ocurrió un error.";
+                document.getElementById("result").style.display = 'block';
             }
-        }
-
-        function showModal(message) {
-            document.getElementById("modalMessage").innerText = message;
-            document.getElementById("myModal").style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById("myModal").style.display = "none";
         }
     </script>
 </head>
@@ -164,7 +108,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="slogan.png" alt="Logo" width="100" height="50" class="d-inline-block align-text-top">
+                <img src="slogan.png" alt="Logo" width="110" height="50" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -172,28 +116,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="bi bi-house-door me-2"></i>Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-grid me-2"></i>Catálogo
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="catalogoDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-box me-2"></i>Productos</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-tags me-2"></i>Ofertas</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-star me-2"></i>Novedades</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="herramientasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-tools me-2"></i>Herramientas
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="herramientasDropdown">
-                            <li><a class="dropdown-item" href="qrfile.html"><i class="bi bi-qr-code me-2"></i>Generador de QR</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2"></i>Videos</a></li>
-                            <li><a class="dropdown-item" href="herramientas.html"><i class="bi bi-code-slash me-2"></i>Software/Scripts</a></li>
-                   
-                        </ul>
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacto.html"><i class="bi bi-envelope me-2"></i>Contacto</a>
@@ -205,11 +128,12 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4">Descargar Videos de YouTube</h1>
-            </div>
+            <h1 class="display-4">Descargar Video de YouTube</h1>
+                    </div>
     </div>
 
     <div class="container video-section">
+       
         <label for="videoUrl">Ingresa la URL de YouTube:</label>
         <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=example" size="50">
         <br><br>
@@ -224,6 +148,8 @@
         </select>
         <br><br>
 
+        <p id="result"></p>
+
         <div style="display: flex; gap: 10px;">
             <button class="btn-custom" onclick="getDownloadId()">Buscar</button>
             <a id="downloadBtn" href="#" class="btn-custom" style="display: none;" download>Descargar</a>
@@ -233,16 +159,9 @@
         <img id="thumbnail" src="" alt="Miniatura del video" style="display: none; width: 300px; height: auto;">
         <br><br>
         <h3 id="videoTitle"></h3>
-
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <p id="modalMessage"></p>
-            </div>
-        </div>
     </div>
 
-  
+
 
     <!-- Bootstrap Bundle con Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
