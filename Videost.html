@@ -7,20 +7,34 @@
 </head>
 <body>
     <h1>Submit Payload</h1>
-    <form action="https://www.y2mate.com/mates/en948/analyzeV2/ajax" method="POST">
-        <label for="k_query">k_query:</label><br>
-        <input type="text" id="k_query" name="k_query" value="https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIfAEpWw-KUg"><br><br>
+    <button id="submit">Submit</button>
 
-        <label for="k_page">k_page:</label><br>
-        <input type="text" id="k_page" name="k_page" value="home"><br><br>
+    <pre id="response"></pre>
 
-        <label for="hl">hl:</label><br>
-        <input type="text" id="hl" name="hl" value="en"><br><br>
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            const url = 'https://www.y2mate.com/mates/en948/analyzeV2/ajax';
+            const payload = new URLSearchParams({
+                k_query: 'https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIfAEpWw-KUg',
+                k_page: 'home',
+                hl: 'en',
+                q_auto: '0'
+            });
 
-        <label for="q_auto">q_auto:</label><br>
-        <input type="text" id="q_auto" name="q_auto" value="0"><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload.toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>
+
