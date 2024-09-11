@@ -1,70 +1,153 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargar Video de YouTube</title>
+    <title>Video Downloader</title>
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
     <script>
-        function generarURL() {
-            const formato = document.getElementById("formato").value;
-            const urlVideo = document.getElementById("urlVideo").value;
-            if (urlVideo.trim() === "") {
-                alert("Por favor, introduce una URL válida de YouTube.");
+        async function getDownloadId() {
+            const selectedFormat = document.getElementById("format").value;
+            const videoUrl = document.getElementById("videoUrl").value;
+
+            // Validar que el usuario haya ingresado un URL
+            if (!videoUrl) {
+                showModal("Por favor, ingresa una URL de YouTube.");
                 return;
             }
-            
-            // Genera la URL de descarga
-            const downloadURL = `https://loader.to/ajax/download.php?format=${formato}&url=${encodeURIComponent(urlVideo)}`;
-            console.log("URL generada para la solicitud:", downloadURL);  // Muestra la URL generada
 
-            // Realiza una solicitud AJAX para obtener el ID de descarga
-            fetch(downloadURL)
-                .then(response => {
-                    console.log("Respuesta recibida:", response);  // Muestra la respuesta completa
-                    return response.json();
-                })
-                .then(data => {
-                    console.log("Datos recibidos del servidor:", data);  // Muestra los datos recibidos
-                    if (data.success && data.id) {
-                        const progressID = data.id; // Extraemos el ID del resultado
-                        const progressURL = `https://p.oceansaver.in/ajax/progress.php?id=${progressID}`;
-                        document.getElementById("linkDescarga").href = progressURL;
-                        document.getElementById("linkDescarga").style.display = "block";
-                        document.getElementById("linkDescarga").innerText = `Ver progreso de descarga (ID: ${progressID})`;
-                    } else {
-                        alert("Error al generar el ID de descarga. Verifica la respuesta.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al realizar la solicitud:", error);
-                    alert("Ocurrió un error al generar la URL de descarga.");
+            const apiUrl = `https://loader.to/ajax/download.php?format=${selectedFormat}&url=${encodeURIComponent(videoUrl)}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "GET"
                 });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const downloadId = data.id;
+                    const imageUrl = data.info.image;
+                    const title = data.info.title;
+
+                    // Mostrar la imagen en el visor y el título
+                    document.getElementById("thumbnail").src = imageUrl;
+                    document.getElementById("thumbnail").style.display = 'block';
+                    document.getElementById("videoTitle").innerText = title;
+
+                    // Fetch the download URL using the id
+                    const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
+                    const progressResponse = await fetch(progressUrl);
+                    const progressData = await progressResponse.json();
+
+                    // Verificar si hay una URL de descarga disponible
+                    if (progressData.download_url) {
+                        const downloadUrl = progressData.download_url;
+                        document.getElementById("downloadBtn").href = downloadUrl;
+                        document.getElementById("downloadBtn").style.display = 'inline-block'; // Mostrar el botón de descarga
+                    } else {
+                        // Mostrar el modal si el formato no está disponible
+                        showModal("El formato seleccionado no está disponible. Por favor, selecciona otro formato.");
+                    }
+                } else {
+                    showModal("No se pudo obtener el ID del video.");
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                showModal("Ocurrió un error al procesar la solicitud.");
+            }
+        }
+
+        // Función para mostrar el modal
+        function showModal(message) {
+            document.getElementById("modalMessage").innerText = message;
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
         }
     </script>
 </head>
 <body>
-    <h1>Descargar Video de YouTube</h1>
+    <h1>Video Downloader</h1>
 
-    <label for="formato">Selecciona el formato:</label>
-    <select id="formato">
-        <option value="360">360</option>
-        <option value="480">480</option>
-        <option value="720">720</option>
-        <option value="1080">1080</option>
-        <option value="1440">1440</option>
+    <!-- Input para la URL de YouTube -->
+    <label for="videoUrl">Ingresa la URL de YouTube:</label>
+    <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=example" size="50">
+
+    <br><br>
+
+    <!-- Selección del formato de video -->
+    <label for="format">Escoge formato:</label>
+    <select id="format">
+        <option value="360">360p</option>
+        <option value="480">480p</option>
+        <option value="720" selected>720p</option>
+        <option value="1080">1080p</option>
+        <option value="1440">1440p</option>
     </select>
 
     <br><br>
 
-    <label for="urlVideo">Introduce la URL del video de YouTube:</label>
-    <input type="text" id="urlVideo" placeholder="https://www.youtube.com/watch?v=xxxxxx" size="50">
+    <!-- Botón para buscar y botón de descarga juntos -->
+    <div style="display: flex; gap: 10px;">
+        <button onclick="getDownloadId()">Buscar</button>
+        <a id="downloadBtn" href="#" style="display: none;" download>Descargar</a>
+    </div>
 
     <br><br>
 
-    <button onclick="generarURL()">Generar URL de descarga</button>
+    <!-- Visor de la imagen miniatura -->
+    <img id="thumbnail" src="" alt="Miniatura del video" style="display: none; width: 300px; height: auto;">
 
     <br><br>
 
-    <a id="linkDescarga" href="#" target="_blank" style="display: none;">Ver progreso de descarga</a>
+    <!-- Título del video -->
+    <h3 id="videoTitle"></h3>
+
+    <!-- Modal de error -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
 </body>
 </html>
