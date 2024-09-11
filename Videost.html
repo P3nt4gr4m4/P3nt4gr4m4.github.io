@@ -1,40 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POST Request Example</title>
+    <title>Descargar Video de YouTube</title>
+    <script>
+        function generarURL() {
+            const formato = document.getElementById("formato").value;
+            const urlVideo = document.getElementById("urlVideo").value;
+            if (urlVideo.trim() === "") {
+                alert("Por favor, introduce una URL válida de YouTube.");
+                return;
+            }
+            const downloadURL = `https://loader.to/ajax/download.php?format=${formato}&url=${encodeURIComponent(urlVideo)}`;
+            document.getElementById("linkDescarga").href = downloadURL;
+            document.getElementById("linkDescarga").style.display = "block";
+        }
+    </script>
 </head>
 <body>
-    <h1>Submit Payload</h1>
-    <button id="submit">Submit</button>
+    <h1>Descargar Video de YouTube</h1>
 
-    <pre id="response"></pre>
+    <label for="formato">Selecciona el formato:</label>
+    <select id="formato">
+        <option value="360">360</option>
+        <option value="480">480</option>
+        <option value="720">720</option>
+        <option value="1080">1080</option>
+        <option value="1440">1440</option>
+    </select>
 
-    <script>
-        document.getElementById('submit').addEventListener('click', function() {
-            const url = 'https://www.y2mate.com/mates/en948/analyzeV2/ajax';
-            const payload = new URLSearchParams({
-                k_query: 'https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIfAEpWw-KUg',
-                k_page: 'home',
-                hl: 'en',
-                q_auto: '0'
-            });
+    <br><br>
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: payload.toString()
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('response').textContent = JSON.stringify(data, null, 2);
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
+    <label for="urlVideo">Introduce la URL del video de YouTube:</label>
+    <input type="text" id="urlVideo" placeholder="https://www.youtube.com/watch?v=xxxxxx" size="50">
+
+    <br><br>
+
+    <button onclick="generarURL()">Generar URL de descarga</button>
+
+    <br><br>
+
+    <a id="linkDescarga" href="#" target="_blank" style="display: none;">Descargar Video</a>
 </body>
 </html>
-
