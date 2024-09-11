@@ -12,9 +12,26 @@
                 alert("Por favor, introduce una URL válida de YouTube.");
                 return;
             }
+            
+            // Genera la URL de descarga
             const downloadURL = `https://loader.to/ajax/download.php?format=${formato}&url=${encodeURIComponent(urlVideo)}`;
-            document.getElementById("linkDescarga").href = downloadURL;
-            document.getElementById("linkDescarga").style.display = "block";
+            
+            // Realiza una solicitud AJAX para obtener el ID de descarga
+            fetch(downloadURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        const progressURL = `https://p.oceansaver.in/ajax/progress.php?id=${data.id}`;
+                        document.getElementById("linkDescarga").href = progressURL;
+                        document.getElementById("linkDescarga").style.display = "block";
+                    } else {
+                        alert("Error al generar el ID de descarga.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al realizar la solicitud:", error);
+                    alert("Ocurrió un error al generar la URL de descarga.");
+                });
         }
     </script>
 </head>
@@ -41,6 +58,6 @@
 
     <br><br>
 
-    <a id="linkDescarga" href="#" target="_blank" style="display: none;">Descargar Video</a>
+    <a id="linkDescarga" href="#" target="_blank" style="display: none;">Ver progreso de descarga</a>
 </body>
 </html>
