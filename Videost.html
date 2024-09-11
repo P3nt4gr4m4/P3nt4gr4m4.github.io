@@ -15,18 +15,19 @@
                 return;
             }
 
+            // Usamos un proxy público para sortear el problema de CORS
+            const proxyUrl = "https://api.allorigins.win/get?url=";
             const apiUrl = `https://loader.to/ajax/download.php?format=${selectedFormat}&url=${encodeURIComponent(videoUrl)}`;
 
             try {
-                const response = await fetch(apiUrl, {
-                    method: "POST"
-                });
+                const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
                 const data = await response.json();
-                
-                if (data.success) {
-                    const downloadId = data.id;
-                    const imageUrl = data.info.image;  // Aquí es donde extraemos la miniatura del objeto "info"
-                    const title = data.info.title;
+                const jsonData = JSON.parse(data.contents); // Datos reales del servicio
+
+                if (jsonData.success) {
+                    const downloadId = jsonData.id;
+                    const imageUrl = jsonData.info.image;
+                    const title = jsonData.info.title;
 
                     document.getElementById("result").innerText = "ID: " + downloadId;
 
@@ -37,13 +38,14 @@
 
                     // Fetch the download URL using the id
                     const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
-                    const progressResponse = await fetch(progressUrl);
+                    const progressResponse = await fetch(proxyUrl + encodeURIComponent(progressUrl));
                     const progressData = await progressResponse.json();
+                    const progressJson = JSON.parse(progressData.contents);
 
-                    if (progressData.download_url) {
-                        const downloadUrl = progressData.download_url;
+                    if (progressJson.download_url) {
+                        const downloadUrl = progressJson.download_url;
                         document.getElementById("downloadBtn").href = downloadUrl;
-                        document.getElementById("downloadBtn").style.display = 'inline-block'; // Mostrar el botón
+                        document.getElementById("downloadBtn").style.display = 'inline-block';
                     } else {
                         document.getElementById("result").innerText = "Failed to get the download URL.";
                     }
