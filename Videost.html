@@ -96,15 +96,11 @@
                     document.getElementById("videoTitle").innerText = title;
 
                     progressBar.style.width = "70%";
-                    progressBar.innerText = "Generando enlace de descarga...";
+                    progressBar.innerText = "Obteniendo enlace de descarga...";
 
-                    // Crear enlace directo de descarga
-                    const downloadUrl = `https://loader.to/ajax/progress.php?id=${downloadId}`;
-                    document.getElementById("downloadBtn").href = downloadUrl;
-                    document.getElementById("downloadBtn").style.display = 'inline-block';
-                    progressBar.style.width = "100%";
-                    progressBar.innerText = "Enlace listo para descargar!";
-                    
+                    // Obtener el enlace de descarga usando el ID
+                    getDownloadUrl(downloadId, progressBar);
+
                 } else {
                     document.getElementById("result").innerText = "No se pudo obtener el ID del video.";
                     progressBar.style.width = "0%";
@@ -112,6 +108,37 @@
                 }
             } catch (error) {
                 console.error("Error al obtener los datos:", error);
+                document.getElementById("result").innerText = "Ocurrió un error al procesar la solicitud.";
+                progressBar.style.width = "0%";
+                progressBar.innerText = "Error.";
+            }
+        }
+
+        // Obtener el enlace de descarga a partir del downloadId
+        async function getDownloadUrl(downloadId, progressBar) {
+            const proxyUrl = "https://api.allorigins.win/get?url=";
+            const downloadUrlApi = `https://loader.to/ajax/progress.php?id=${downloadId}`;
+
+            try {
+                const response = await fetch(proxyUrl + encodeURIComponent(downloadUrlApi));
+                const data = await response.json();
+                const downloadJson = JSON.parse(data.contents);
+
+                if (downloadJson.download_url) {
+                    const downloadUrl = downloadJson.download_url.replace(/\\/g, ''); // Eliminar barras invertidas
+                    document.getElementById("downloadBtn").href = downloadUrl;
+                    document.getElementById("downloadBtn").style.display = 'inline-block';
+
+                    // Actualizar progreso al 100% y finalizar
+                    progressBar.style.width = "100%";
+                    progressBar.innerText = "Enlace listo para descargar!";
+                } else {
+                    document.getElementById("result").innerText = "No se pudo obtener el enlace de descarga.";
+                    progressBar.style.width = "0%";
+                    progressBar.innerText = "Error.";
+                }
+            } catch (error) {
+                console.error("Error al obtener la URL de descarga:", error);
                 document.getElementById("result").innerText = "Ocurrió un error al procesar la solicitud.";
                 progressBar.style.width = "0%";
                 progressBar.innerText = "Error.";
@@ -165,7 +192,7 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4">Descargar Videos </h1>
+            <h1 class="display-4">Descargar Videos de YouTube</h1>
             <p class="lead">Ingresa la URL y selecciona el formato para descargar videos de YouTube</p>
         </div>
     </div>
