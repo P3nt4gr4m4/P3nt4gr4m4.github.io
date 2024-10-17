@@ -118,9 +118,18 @@
         async function pollDownloadUrl(downloadId, progressBar) {
             const proxyUrl = "https://api.allorigins.win/get?url=";
             const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${downloadId}`;
-
-            // Intentar obtener la URL de descarga cada 5 segundos hasta que esté lista
+            let attempts = 0;  // Contador de intentos
+            const maxAttempts = 120;  // Número máximo de intentos (por ejemplo, 10 minutos con intervalo de 5 segundos)
+           
             const pollInterval = setInterval(async () => {
+                attempts++;
+                if (attempts > maxAttempts) {
+                    clearInterval(pollInterval);
+                    progressBar.style.width = "0%";
+                    progressBar.innerText = "La descarga está tardando demasiado. Inténtalo nuevamente más tarde.";
+                    return;
+                }
+
                 try {
                     const progressResponse = await fetch(proxyUrl + encodeURIComponent(progressUrl));
                     const progressData = await progressResponse.json();
@@ -139,6 +148,12 @@
                     } else {
                         console.log("La URL de descarga aún no está disponible. Reintentando...");
                     }
+
+                    // Cada 10 intentos, mostrar mensaje de que aún se está procesando
+                    if (attempts % 10 === 0) {
+                        document.getElementById("result").innerText = "Todavía estamos procesando tu solicitud. Esto puede tardar unos minutos...";
+                    }
+
                 } catch (error) {
                     console.error("Error al obtener la URL de descarga:", error);
                 }
