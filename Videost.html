@@ -72,14 +72,16 @@
             progressBar.style.width = "30%";
             progressBar.innerText = "Buscando...";
 
+            const proxyUrl = "https://api.allorigins.win/get?url=";
             const apiUrl = `https://loader.to/ajax/download.php?format=${selectedFormat}&url=${encodeURIComponent(videoUrl)}`;
 
             try {
                 progressBar.style.width = "50%";
                 progressBar.innerText = "Obteniendo ID del video...";
 
-                const response = await fetch(apiUrl);
-                const jsonData = await response.json(); // Datos directos del servicio loader.to
+                const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
+                const data = await response.json();
+                const jsonData = JSON.parse(data.contents); // Datos del servicio loader.to
 
                 // Verificar si el ID fue obtenido exitosamente
                 if (jsonData.success) {
@@ -114,11 +116,13 @@
 
         // Obtener el enlace de descarga a partir del downloadId
         async function getDownloadUrl(downloadId, progressBar) {
+            const proxyUrl = "https://api.allorigins.win/get?url=";
             const downloadUrlApi = `https://loader.to/ajax/progress.php?id=${downloadId}`;
 
             try {
-                const response = await fetch(downloadUrlApi);
-                const downloadJson = await response.json();
+                const response = await fetch(proxyUrl + encodeURIComponent(downloadUrlApi));
+                const data = await response.json();
+                const downloadJson = JSON.parse(data.contents);
 
                 if (downloadJson.download_url) {
                     const downloadUrl = downloadJson.download_url.replace(/\\/g, ''); // Eliminar barras invertidas
@@ -188,7 +192,7 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4"> Videos de YouTube</h1>
+            <h1 class="display-4">Descargar Videos de YouTube</h1>
             <p class="lead">Ingresa la URL y selecciona el formato para descargar videos de YouTube</p>
         </div>
     </div>
