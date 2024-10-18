@@ -84,6 +84,7 @@
                     const downloadBtn = document.getElementById("downloadBtn");
                     downloadBtn.href = downloadUrl;
                     downloadBtn.setAttribute("download", videoTitle + ".mp4");  // Asignar nombre del archivo
+                    downloadBtn.setAttribute("target", "_blank");
                     downloadBtn.style.display = 'inline-block';
 
                     // Mostrar el título del video
