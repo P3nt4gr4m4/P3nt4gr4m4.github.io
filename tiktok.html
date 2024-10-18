@@ -67,6 +67,7 @@
             // Reiniciar el resultado y ocultar el botón de descarga
             document.getElementById("result").innerText = "Buscando video...";
             document.getElementById("downloadBtn").style.display = "none";
+            document.getElementById("videoTitle").innerText = "";
 
             const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(videoUrl)}&hd=1`;
 
@@ -77,17 +78,24 @@
                 // Verificar si la API devolvió el enlace correctamente
                 if (data && data.data && data.data.play) {
                     const downloadUrl = data.data.play;
+                    const videoTitle = data.data.title || "video_tiktok"; // Título del video o nombre predeterminado
 
-                    // Mostrar enlace de descarga
-                    document.getElementById("result").innerText = "Enlace listo para descargar!";
-                    document.getElementById("downloadBtn").href = downloadUrl;
-                    document.getElementById("downloadBtn").style.display = 'inline-block';
+                    // Forzar la descarga del archivo
+                    const downloadBtn = document.getElementById("downloadBtn");
+                    downloadBtn.href = downloadUrl;
+                    downloadBtn.setAttribute("download", videoTitle + ".mp4");  // Asignar nombre del archivo
+                    downloadBtn.style.display = 'inline-block';
+
+                    // Mostrar el título del video
+                    document.getElementById("videoTitle").innerText = "Título: " + videoTitle;
 
                     // Mostrar miniatura si está disponible
                     if (data.data.cover) {
                         document.getElementById("thumbnail").src = data.data.cover;
                         document.getElementById("thumbnail").style.display = 'block';
                     }
+
+                    document.getElementById("result").innerText = "Enlace listo para descargar!";
                 } else {
                     document.getElementById("result").innerText = "No se pudo obtener el enlace de descarga.";
                 }
@@ -172,3 +180,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
