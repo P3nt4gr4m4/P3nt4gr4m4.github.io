@@ -80,13 +80,11 @@
                     const downloadUrl = data.data.play;
                     const videoTitle = data.data.title || "video_tiktok"; // Título del video o nombre predeterminado
 
-                    // Forzar la descarga del archivo usando JavaScript
-                    const a = document.createElement('a');
-                    a.href = downloadUrl;
-                    a.download = videoTitle + ".mp4";
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
+                    // Forzar la descarga del archivo
+                    const downloadBtn = document.getElementById("downloadBtn");
+                    downloadBtn.href = downloadUrl;
+                    downloadBtn.setAttribute("download", videoTitle + ".mp4");  // Asignar nombre del archivo
+                    downloadBtn.style.display = 'inline-block';
 
                     // Mostrar el título del video
                     document.getElementById("videoTitle").innerText = "Título: " + videoTitle;
@@ -97,7 +95,7 @@
                         document.getElementById("thumbnail").style.display = 'block';
                     }
 
-                    document.getElementById("result").innerText = "Descargando video...";
+                    document.getElementById("result").innerText = "Enlace listo para descargar!";
                 } else {
                     document.getElementById("result").innerText = "No se pudo obtener el enlace de descarga.";
                 }
@@ -154,7 +152,7 @@
 
     <div class="hero">
         <div class="container text-center">
-            <h1 class="display-4">Descargar Videos de TikTok</h1>
+            <h1 class="display-4"> Videos de TikTok</h1>
             <p class="lead">Ingresa la URL y descarga videos de TikTok</p>
         </div>
     </div>
@@ -168,6 +166,7 @@
 
         <div style="display: flex; gap: 10px;">
             <button class="btn-custom" onclick="getTikTokDownload()">Buscar</button>
+            <a id="downloadBtn" href="#" class="btn-custom" style="display: none;" download>Descargar</a>
         </div>
         <br><br>
 
@@ -181,3 +180,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
