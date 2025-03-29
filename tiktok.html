@@ -105,6 +105,14 @@
                 document.getElementById("result").innerText = "Ocurrió un error al procesar la solicitud.";
             }
         }
+        function limpiarCampos() {
+        document.getElementById("videoUrl").value = "";
+        document.getElementById("result").innerText = "Haz clic en el botón para buscar el video.";
+        document.getElementById("videoTitle").innerText = "";
+        document.getElementById("thumbnail").style.display = 'none';
+        document.getElementById("downloadBtn").style.display = 'none';
+        document.getElementById("thumbnail").src = "";
+    }
     </script>
 </head>
 <body>
@@ -169,6 +177,8 @@
         <div style="display: flex; gap: 10px;">
             <button class="btn-custom" onclick="getTikTokDownload()">Buscar</button>
             <a id="downloadBtn" href="#" class="btn-custom" style="display: none;" download>Descargar</a>
+            <button class="btn-custom" onclick="limpiarCampos()">Limpiar</button>
+
         </div>
         <br><br>
 
