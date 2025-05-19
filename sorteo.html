@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="origin-when-cross-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rifa Día del Padre - Proyecto Fresa</title>
+  <link rel="stylesheet" href="https://cdn.payphonetodoesposible.com/box/v1.1/payphone-payment-box.css">
+  <script type="module" src="https://cdn.payphonetodoesposible.com/box/v1.1/payphone-payment-box.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(145deg, #ffe6e6, #fefefe);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh; /* ✅ para evitar corte de fondo */
+}
+
+    .main-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center; /* CENTRAR horizontalmente */
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+      min-height: 100vh;
+    }
+
+    .ticket-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 360px;
+      text-align: center;
+      border: 3px dashed #ff4d4d;
+      
+    }
+
+    .ticket-container h1 {
+      margin-bottom: 10px;
+      color: #d6336c;
+    }
+
+    .ticket-container p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #444;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .counter button {
+      padding: 10px;
+      font-size: 18px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      width: 40px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .counter span {
+      margin: 0 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .buy-btn {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .buy-btn:hover {
+      background-color: #cc0000;
+    }
+
+    #total {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+      color: #000;
+    }
+
+    #pay-container {
+      background: #fff;
+      border-radius: 20px;
+       padding: 20px;
+      max-width: 450px;
+      transform: scale(0.80);
+      transform-origin: top center;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+#pp-button {
+  overflow: hidden;
+}
+
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #pay-container {
+        transform: scale(0.90);
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="ticket-container">
+      <h1>🎁 Rifa Día del Padre</h1>
+      <p>Participa por un combo de electrodomésticos. Elige cuántos tickets quieres comprar:</p>
+
+      <div class="counter">
+        <button onclick="cambiarCantidad(-1)">-</button>
+        <span id="cantidad">1</span>
+        <button onclick="cambiarCantidad(1)">+</button>
+      </div>
+
+      <p id="total">Total: $1.00</p>
+      <button class="buy-btn" onclick="procesarPago()">Comprar</button>
+    </div>
+
+    <div id="pay-container">
+      <div id="pp-button"></div>
+    </div>
+  </div>
+
+  <script>
+    let cantidadTickets = 1;
+    const valorPorTicket = 100; // en centavos
+
+    function cambiarCantidad(cambio) {
+      cantidadTickets = Math.max(1, cantidadTickets + cambio);
+      document.getElementById('cantidad').innerText = cantidadTickets;
+      document.getElementById('total').innerText = "Total: $" + (cantidadTickets * valorPorTicket / 100).toFixed(2);
+    }
+
+    function procesarPago() {
+      const total = cantidadTickets * valorPorTicket;
+
+      document.getElementById('pp-button').innerHTML = '';
+      document.getElementById('pay-container').style.display = 'block';
+
+      new PPaymentButtonBox({
+        token: 'AVq1mJwDf9KzGuP2x8uyVVaEVK_GeJHmqq18KFTJw1r6n5CS3GC23_x-svdWXbL2IwKKPxigHEXgbpg-JeKmoVk05xQFZW8_JXMe4yCniW1GyCmCiPr0-J9xfkg2TWvc1oNrzHThCxxw6HGr_csr6pOA1uZzQLhPSlB7g_xY5ocoKWvMi42LBAQNCtt3v6qbs0RwTrQPLpxKl1giB5biHO3KjvjFyAVBXdpiNGyYeCNUmga-joLwdRKyyjtahXs4TqUpceOtcjarVLLFQQHX58gFIgcPa-wIU4sqOCFsbgaQzY9LCGVfFSM-FyBBDvhHuGPvOdvPDH6TI0zxLYwmqtt_uso',
+        clientTransactionId: 'TX-' + cantidadTickets + '-' + Date.now(),
+        amount: total,
+        amountWithoutTax: total,
+        currency: "USD",
+        storeId: "6acb1a31-e667-4f37-b687-de6bd23e0bab",
+        reference: `Compra de ${cantidadTickets} ticket(s) para rifa`
+      }).render('pp-button');
+    }
+  </script>
+</body>
+</html>
