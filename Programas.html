@@ -1,65 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Venta de Programas </title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <style>
-        body {
-            background-color: #f0f8ff;
-        }
-        .navbar {
-            background-color: #4a90e2 !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
-        }
-        .navbar-brand, .nav-link {
-            color: white !important;
-            font-weight: bold;
-        }
-        .nav-link:hover {
-            color: #ffd700 !important;
-        }
-        .hero {
-            background: linear-gradient(45deg, #4a90e2, #79c7c5);
-            color: white;
-            padding: 4rem 0;
-            margin-bottom: 2rem;
-        }
-        .card {
-            transition: transform 0.3s;
-            margin-bottom: 1rem;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .catalog-section {
-            margin-bottom: 2rem;
-        }
-        .card-title {
-            font-size: 1.5rem;
-            color: #4a90e2;
-        }
-        .btn-custom {
-            background-color: #4a90e2;
-            color: white;
-            font-weight: bold;
-        }
-        .btn-custom:hover {
-            background-color: #357ABD;
-        }
-        .card-img-top {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Venta de Programas — Catálogo</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+  <style>
+    :root{
+      --primary:#4a90e2;
+      --primary-dark:#357abd;
+      --muted:#6c7a89;
+    }
+    body {
+      background-color: #f0f8ff;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    .navbar {
+      background-color: var(--primary) !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    }
+    .navbar-brand, .nav-link { color: #fff !important; font-weight:600; }
+    .nav-link:hover { color: #ffd700 !important; }
+    .hero {
+      background: linear-gradient(45deg, var(--primary), #79c7c5);
+      color: white;
+      padding: 3rem 0;
+      margin-bottom: 1.5rem;
+      border-radius: 0 0 12px 12px;
+    }
+    .card {
+      transition: transform .25s ease, box-shadow .25s ease;
+      border: 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.08);
+    }
+    .card-title { font-size: 1.05rem; color: #163a6a; margin-bottom: .25rem; }
+    .card-text { font-size: .92rem; color: #4f5b6a; margin-bottom: .6rem; }
+    .btn-custom {
+      background-color: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      border-radius: .35rem;
+    }
+    .btn-custom:hover { background-color: var(--primary-dark); color: #fff; }
+    .card-img-top {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: #e9f2fb;
+    }
+    footer { margin-top: 2.25rem; padding: 1.25rem 0; text-align:center; color:var(--muted); }
+    @media (max-width: 767px) {
+      .card-img-top { height: 140px; }
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="slogan.png" alt="Logo" width="100" height="50" class="d-inline-block align-text-top">
@@ -70,7 +77,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="bi bi-house-door me-2"></i>Inicio</a>
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,7 +92,6 @@
 </ul>
 
 
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="herramientasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-tools me-2"></i>Herramientas
@@ -107,83 +113,299 @@
         </div>
     </nav>
 
-    <div class="hero">
-        <div class="container text-center">
-            <h1 class="display-4">Venta Programas</h1>
-            <p class="lead">Descubre nuestro catálogo de programas ofimacticos, diseño, modelado, etc.</p>
-        </div>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold">Venta de Programas</h1>
+      <p class="lead mb-0">Licencias digitales y soporte técnico — Office, AutoCAD, Photoshop y más.</p>
+      <small class="d-block mt-2">Revisa la compatibilidad antes de comprar. Ofrecemos instalación y facturación si lo solicitas.</small>
     </div>
+  </header>
 
+  <!-- MAIN: GRID 3 COLUMNAS FIJAS -->
+  <main class="container">
+    <div class="row g-4">
+
+      <!-- 1: Microsoft Office -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="office_2021_professional_plus_800x.jpg" class="card-img-top" alt="Microsoft Office - Licencia">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Microsoft Office 2021</h5>
+            <p class="card-text">Word, Excel, PowerPoint, Outlook. Licencia digital con activación y soporte de instalación.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="h6 text-success fw-bold">$49.99</span>
+              <div>
+                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#modalOffice">
+                  <i class="bi bi-info-circle"></i> Detalles
+                </button>
+                <a href="contacto.html?producto=Office2021" class="btn btn-custom btn-sm">
+                  <i class="bi bi-cart"></i> Comprar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2: AutoCAD -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="AUTO-DESK-AUTO-CAD-LOGOS-1.png" class="card-img-top" alt="AutoCAD - Licencia">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">AutoCAD 2024</h5>
+            <p class="card-text">Diseño CAD 2D/3D para ingeniería y arquitectura. Incluye guía de instalación.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="h6 text-success fw-bold">$199.00</span>
+              <div>
+                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#modalAutoCAD">
+                  <i class="bi bi-info-circle"></i> Detalles
+                </button>
+                <a href="contacto.html?producto=AutoCAD2024" class="btn btn-custom btn-sm">
+                  <i class="bi bi-cart"></i> Comprar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: Photoshop -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="pngimg.com - photoshop_PNG39.png" class="card-img-top" alt="Photoshop - Licencia">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Adobe Photoshop</h5>
+            <p class="card-text">Edición profesional de imágenes. Planes mensuales o licencia anual disponible.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="h6 text-success fw-bold">$29.99 / mes</span>
+              <div>
+                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#modalPhotoshop">
+                  <i class="bi bi-info-circle"></i> Detalles
+                </button>
+                <a href="contacto.html?producto=Photoshop" class="btn btn-custom btn-sm">
+                  <i class="bi bi-cart"></i> Comprar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: Illustrator -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="images/illustrator.jpg" class="card-img-top" alt="Illustrator - Licencia">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Adobe Illustrator</h5>
+            <p class="card-text">Diseño vectorial profesional para logos, ilustraciones y material publicitario.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="h6 text-success fw-bold">$24.99 / mes</span>
+              <div>
+                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#modalIllustrator">
+                  <i class="bi bi-info-circle"></i> Detalles
+                </button>
+                <a href="contacto.html?producto=Illustrator" class="btn btn-custom btn-sm">
+                  <i class="bi bi-cart"></i> Comprar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5: Windows 10 Pro -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="images/windows-pro.jpg" class="card-img-top" alt="Windows 10 Pro - Licencia">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Windows 10 Pro</h5>
+            <p class="card-text">Licencia digital oficial para activar Windows 10 Pro. Soporte para activación remoto.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="h6 text-success fw-bold">$39.00</span>
+              <div>
+                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#modalWindows">
+                  <i class="bi bi-info-circle"></i> Detalles
+                </button>
+                <a href="contacto.html?producto=Win10Pro" class="btn btn-custom btn-sm">
+                  <i class="bi bi-cart"></i> Comprar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6: CorelDRAW -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="images/coreldraw.jpg" class="card-img-top" alt="CorelDRAW - Licencia">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">CorelDRAW Graphics Suite</h5>
+            <p class="card-text">Suite de diseño vectorial y maquetación. Licencias para negocio o uso personal.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="h6 text-success fw-bold">$149.00</span>
+              <div>
+                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#modalCorel">
+                  <i class="bi bi-info-circle"></i> Detalles
+                </button>
+                <a href="contacto.html?producto=CorelDraw" class="btn btn-custom btn-sm">
+                  <i class="bi bi-cart"></i> Comprar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /row -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
     <div class="container">
-        <div class="row catalog-section">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="usbSeguro.jpg" class="card-img-top" alt="Generador de Códigos QR">
-                    <div class="card-body">
-                        <h5 class="card-title">Pc-Usb</h5>
-                        <p class="card-text">🔒 Protege tu equipo bloqueando los puertos USB con este script ⚙️💻 Evita accesos no autorizados y previene el uso indebido de dispositivos externos.</p>
-                        <a href="https://www.facebook.com/Chrispatech/videos/545070037944387" class="btn btn-custom">Ver más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="llave.jpg" class="card-img-top" alt="Script de Automatización de Tareas">
-                    <div class="card-body">
-                        <h5 class="card-title">Bypass User Account W10</h5>
-                        <p class="card-text">¿Problemas con el Control de Cuentas de Usuario (UAC)? Aprende a repararlo o hacer un bypass con un script .bat ⚙️💻.Descubre cómo ejecutar procesos con permisos admin.</p>
-                        <a href="https://www.facebook.com/Chrispatech/videos/1031340768288029" target="_blank" class="btn btn-custom">Ver más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="wifis.jpg" class="card-img-top" alt="Administrador de Redes WiFi">
-                    <div class="card-body">
-                        <h5 class="card-title">WiFi Stealer</h5>
-                        <p class="card-text">📶 Descubre cómo obtener las contraseñas de las redes WiFi guardadas en tu ordenador con un script .bat 🔍💻 Aprende a listar y recuperar las claves almacenadas.</p>
-                        <a href="https://www.facebook.com/Chrispatech/videos/1035302011676236" target="_blank" class="btn btn-custom">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row catalog-section">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="evil.jpg" class="card-img-top" alt="Analizador de Datos en Tiempo Real">
-                    <div class="card-body">
-                        <h5 class="card-title">Gen Evil Portal</h5>
-                        <p class="card-text">El generador Evil Portal es un pequeño programa creado en Python y PyQt 🐍💻. Su propósito es generar páginas HTML maliciosas 🕸️ que actúan como un portal cautivo 🛑, diseñadas para engañar a los usuarios e interceptar información. ¡Un proyecto que combina diseño visual con ciberseguridad oscura! 🌐💀</p>
-                        <a href="https://fb.watch/viJEZJBITO/" target="_blank" class="btn btn-custom">Ver más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="anytest.jpg" class="card-img-top" alt="Compresor de Archivos Avanzado">
-                    <div class="card-body">
-                        <h5 class="card-title">Medicina Anydesk</h5>
-                        <p class="card-text">Este es un pequeño script realizado en Python cuyo objetivo es obtener más tiempo de uso en AnyDesk ⌛🐍. La herramienta simula la extensión de la sesión en el software de control remoto, permitiendo superar los límites temporales establecidos.</p>
-                        <a href="https://fb.watch/vk12OQqV-5/" target="_blank" class="btn btn-custom">Ver más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="vulnerability-scanner.jpg" class="card-img-top" alt="Escáner de Vulnerabilidades">
-                    <div class="card-body">
-                        <h5 class="card-title">Escáner de Vulnerabilidades</h5>
-                        <p class="card-text">Una herramienta de seguridad que escanea y detecta posibles vulnerabilidades en redes y sistemas. Ideal para mejorar la seguridad de tu infraestructura.</p>
-                        <a href="ccc" target="_blank" class="btn btn-custom">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <small>&copy; <span id="year"></span> Chrispatech. Todos los derechos reservados. — Soporte: contacto.html</small>
     </div>
+  </footer>
 
+  <!-- MODALES (detalles) -->
+  <!-- Modal Office -->
+  <div class="modal fade" id="modalOffice" tabindex="-1" aria-labelledby="modalOfficeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalOfficeLabel">Microsoft Office 2021 — Detalles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Incluye:</strong> Word, Excel, PowerPoint, Outlook.</p>
+          <p><strong>Tipo de licencia:</strong> Licencia digital con activación remota. Opciones: perpetua o suscripción (según stock).</p>
+          <p><strong>Soporte:</strong> Asistencia en instalación y activación por 24 horas.</p>
+          <p><small>Antes de comprar confirme compatibilidad con su sistema operativo. No vendemos software pirata; se ofrecen licencias oficiales o con soporte técnico autorizado.</small></p>
+        </div>
+        <div class="modal-footer">
+          <a href="contacto.html?producto=Office2021" class="btn btn-custom">Solicitar / Comprar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Bootstrap Bundle con Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <!-- Modal AutoCAD -->
+  <div class="modal fade" id="modalAutoCAD" tabindex="-1" aria-labelledby="modalAutoCADLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAutoCADLabel">AutoCAD 2024 — Detalles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Ideal para:</strong> Ingenieros, arquitectos y diseñadores CAD.</p>
+          <p><strong>Requisitos mínimos:</strong> Windows 10/11 (64-bit), 8 GB RAM (recomendado 16 GB), GPU con soporte DirectX 11.</p>
+          <p><strong>Soporte:</strong> Guía de instalación y activación incluida. Opciones de licencia temporal o anual.</p>
+          <p><small>Verifique compatibilidad de sus archivos y versiones antes de la compra.</small></p>
+        </div>
+        <div class="modal-footer">
+          <a href="contacto.html?producto=AutoCAD2024" class="btn btn-custom">Solicitar / Comprar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Photoshop -->
+  <div class="modal fade" id="modalPhotoshop" tabindex="-1" aria-labelledby="modalPhotoshopLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPhotoshopLabel">Adobe Photoshop — Detalles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Funciones:</strong> Retoque avanzado, capas, filtros, composición y exportación profesional.</p>
+          <p><strong>Planes:</strong> Mensual o anual. Soporte para instalación y activación.</p>
+          <p><small>Se recomienda GPU y al menos 8 GB RAM para flujos de trabajo profesionales.</small></p>
+        </div>
+        <div class="modal-footer">
+          <a href="contacto.html?producto=Photoshop" class="btn btn-custom">Solicitar / Comprar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Illustrator -->
+  <div class="modal fade" id="modalIllustrator" tabindex="-1" aria-labelledby="modalIllustratorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalIllustratorLabel">Adobe Illustrator — Detalles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Ideal para:</strong> Diseño vectorial, logos, ilustraciones y material publicitario.</p>
+          <p><strong>Requisitos:</strong> Windows o macOS compatibles, 8 GB RAM mínimo.</p>
+          <p><small>Incluye exportación a PDF, SVG y otros formatos vectoriales.</small></p>
+        </div>
+        <div class="modal-footer">
+          <a href="contacto.html?producto=Illustrator" class="btn btn-custom">Solicitar / Comprar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Windows -->
+  <div class="modal fade" id="modalWindows" tabindex="-1" aria-labelledby="modalWindowsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalWindowsLabel">Windows 10 Pro — Detalles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Tipo:</strong> Licencia digital oficial para activar Windows 10 Pro.</p>
+          <p><strong>Soporte:</strong> Ayuda en activación remota y recomendaciones para drivers y actualizaciones.</p>
+          <p><small>Se entrega clave y pasos de activación. Solicite factura si la requiere.</small></p>
+        </div>
+        <div class="modal-footer">
+          <a href="contacto.html?producto=Win10Pro" class="btn btn-custom">Solicitar / Comprar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Corel -->
+  <div class="modal fade" id="modalCorel" tabindex="-1" aria-labelledby="modalCorelLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalCorelLabel">CorelDRAW Graphics Suite — Detalles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Funciones:</strong> Diseño vectorial, maquetación, edición de fotos y tipografía avanzada.</p>
+          <p><strong>Licencias:</strong> Individual, negocio o educativo. Soporte para instalación incluida.</p>
+          <p><small>Preguntar por descuentos por volumen o licencias educativas.</small></p>
+        </div>
+        <div class="modal-footer">
+          <a href="contacto.html?producto=CorelDraw" class="btn btn-custom">Solicitar / Comprar</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOTSTRAP BUNDLE -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+  <!-- SCRIPT UTILES -->
+  <script>
+    // Año dinámico en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // (Opcional) : placeholder para futura lógica JS (carrito, filtros, etc.)
+  </script>
 </body>
 </html>
